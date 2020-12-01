@@ -12,16 +12,24 @@ function onAddNote(){
 	note.id=new Date().getTime();
 	my_notes.push(note);
 	localStorage.setItem(mynote_key,JSON.stringify(my_notes));
+	document.getElementById('note').value='';
 	getSavedNotes();
 }
 function getSavedNotes(){
 	let notes=my_notes;
 	let my_notes_html='';
-	notes.forEach(function(val){
+	notes.forEach(function(val,index){
+	if(val){
 	my_notes_html=my_notes_html+
-	'<div> <p>'+getUserReadableDate(val.date)+'\n</p><p>'+val.value+'\n</p></div>'
+	`<div><p>${getUserReadableDate(val.date)}</p>
+	<p>${val.value}</p>
+	<div class="delete" onclick="deleteNote(`+index+`)" >Delete</div>
+	</div>`
+	//'<div> <p>'+getUserReadableDate(val.date)+'\n</p><p>'+val.value+
+	//'\n</p>'+'<div class="delete" onclick="deleteNote(`+index+`)" >Delete</div>'+
+	//'</div>'Error in comment: This doesn't pass index as variable'
+	}
 	});
-	//`<div><p>${val.value}</p></div>`
 	document.getElementById('savedNotes').innerHTML=my_notes_html;
 }
 function getUserReadableDate(date){
@@ -30,4 +38,10 @@ function getUserReadableDate(date){
 	return readableDate.getDate()+' '+eng_month[readableDate.getMonth()]+' '+
 	readableDate.getFullYear()+' '+ readableDate.getHours()+':'
 	+ readableDate.getMinutes();
+}
+function deleteNote(index){
+console.log(index);
+	delete my_notes[index];
+	localStorage.setItem(mynote_key,JSON.stringify(my_notes));
+	getSavedNotes();
 }

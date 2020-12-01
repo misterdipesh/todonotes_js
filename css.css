@@ -25,3 +25,10 @@
 	padding:12px;
 
 }
+.delete{
+	color:#824141;
+	cursor:pointer;
+}
+.delete:hover{
+	text-decoration: underline;
+}
