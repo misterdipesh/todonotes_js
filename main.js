@@ -1,5 +1,6 @@
 let mynote_key='my_note_key';
-let my_notes=[];
+let my_notes=localStorage.getItem(mynote_key)?
+	JSON.parse(localStorage.getItem(mynote_key)):[];
 window.onload=function(){
 	getSavedNotes();
 }
@@ -8,20 +9,25 @@ function onAddNote(){
 	let note={};
 	note.value=myNote;
 	note.date=new Date();
+	note.id=new Date().getTime();
 	my_notes.push(note);
-
 	localStorage.setItem(mynote_key,JSON.stringify(my_notes));
-	
 	getSavedNotes();
 }
 function getSavedNotes(){
-	let notes=localStorage.getItem(mynote_key);
+	let notes=my_notes;
 	let my_notes_html='';
-
-	
-	JSON.parse(notes).forEach(function(val){
+	notes.forEach(function(val){
 	my_notes_html=my_notes_html+
-	'<div> <p>'+val.date+'\n</p><p>'+val.value+'\n</p></div>'
+	'<div> <p>'+getUserReadableDate(val.date)+'\n</p><p>'+val.value+'\n</p></div>'
 	});
+	//`<div><p>${val.value}</p></div>`
 	document.getElementById('savedNotes').innerHTML=my_notes_html;
+}
+function getUserReadableDate(date){
+	let eng_month=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+	let readableDate= new Date(date);
+	return readableDate.getDate()+' '+eng_month[readableDate.getMonth()]+' '+
+	readableDate.getFullYear()+' '+ readableDate.getHours()+':'
+	+ readableDate.getMinutes();
 }
