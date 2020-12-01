@@ -6,13 +6,22 @@
 	color:#fff;
 	font-size:16px;
 	padding:10px 20px;
-	float:right;//make button float on right side
 	border:1 px solid black;
-	cursor:pointer;//change the cursor on right side
+	cursor:pointer;
 
 }
 #noteBtn:hover{
 	background:#fff;
 	color:green;
 	border:1 px solid black;
+}
+#savedNotes{
+	margin-top:40px;
+
+}
+#savedNotes div{
+	border-radius: 5px;
+	background:#f5f5f5;
+	padding:12px;
+
 }
