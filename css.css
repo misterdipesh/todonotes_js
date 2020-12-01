@@ -1,0 +1,18 @@
+#note{
+	width:100%;
+}
+#noteBtn {
+	background:green;
+	color:#fff;
+	font-size:16px;
+	padding:10px 20px;
+	float:right;//make button float on right side
+	border:1 px solid black;
+	cursor:pointer;//change the cursor on right side
+
+}
+#noteBtn:hover{
+	background:#fff;
+	color:green;
+	border:1 px solid black;
+}
