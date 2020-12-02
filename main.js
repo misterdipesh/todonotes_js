@@ -40,8 +40,26 @@ function getUserReadableDate(date){
 	+ readableDate.getMinutes();
 }
 function deleteNote(index){
-console.log(index);
 	delete my_notes[index];
 	localStorage.setItem(mynote_key,JSON.stringify(my_notes));
 	getSavedNotes();
+}
+function onSearchNote(item){
+	let searched_item =document.getElementById('searchText').value;
+	let search= my_notes.filter(note=>note.value.toLowerCase()==searched_item.toLowerCase());
+	getSearchNotes(search);
+}
+function getSearchNotes(notes){
+	let notes=my_notes;
+	let my_notes_html='';
+	notes.forEach(function(val,index){
+	if(val){
+	my_notes_html=my_notes_html+
+	`<div><p>${getUserReadableDate(val.date)}</p>
+	<p>${val.value}</p>
+	<div class="delete" onclick="deleteNote(`+index+`)" >Delete</div>
+	</div>`
+	}
+	});
+	document.getElementById('savedNotes').innerHTML=my_notes_html;
 }
